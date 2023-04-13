@@ -9,6 +9,7 @@
     <!--side part -->
     <div style="display: flex">
 
+
       <div style="width:200px; overflow: hidden;margin-right: 4px;background-color: #f3ebf1">
         <el-menu :default-active="$router.path" router class="el-menu-demo" @select="handleSelect">
           <el-menu-item index="/">

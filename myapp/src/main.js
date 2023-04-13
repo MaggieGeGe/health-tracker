@@ -13,7 +13,7 @@ const app = createApp(App)
 
 
 app.use(router)
-app.use(ElementPlus)
+app.use(ElementPlus,{size:'medium'})
 
 app.mount('#app')
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
