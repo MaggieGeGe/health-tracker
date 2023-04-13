@@ -7,6 +7,15 @@
 <script>
 
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  data(){
+    return {
+      tableData:[
+        {name:'ge',age:18},
+        {name:'ge',age:18},
+        {name:'ge',age:18}
+      ]
+    }
+  }
 }
 </script>
