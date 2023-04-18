@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
-import com.example.backend.Service.IUserService;
-import com.example.backend.entity.User;
+import com.example.backend.Service.IRequiredFoodService;
+import com.example.backend.entity.RequiredFood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +12,15 @@ import java.util.List;
 
 @CrossOrigin
 @RestController //rest 封格的controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/requiredfood")
+public class RequiredFoodController {
 
     @Autowired
-    IUserService userService;
+    IRequiredFoodService requiredFoodService;
 
     @GetMapping("/list")
-    public List<User> listUsers(){
-        return userService.listUsers();
-
+    public List<RequiredFood> listRequiredFood(){
+        return requiredFoodService.listRequiredFood();
     }
 
 }
