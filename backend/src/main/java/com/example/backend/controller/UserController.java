@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 
 import com.example.backend.Service.IUserService;
+import com.example.backend.common.Result;
+import com.example.backend.controller.request.UserPageRequest;
 import com.example.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,8 +21,16 @@ public class UserController {
     IUserService userService;
 
     @GetMapping("/list")
-    public List<User> listUsers(){
-        return userService.listUsers();
+    public Result listUsers(){
+        List<User> users =  userService.listUsers();
+        return Result.success(users);
+
+    }
+
+    @GetMapping("/page")
+    public Result page(UserPageRequest userPageRequest){
+        userService.page(userPageRequest);
+        return Result.success(userService.page(userPageRequest));
 
     }
 

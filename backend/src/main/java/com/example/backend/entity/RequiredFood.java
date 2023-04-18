@@ -23,8 +23,9 @@ public class RequiredFood {
         return type;
     }
 
-    public void setType(FoodType type) {
-        this.type = type;
+
+    public void setType(String type) {
+        this.type = FoodType.valueOf(type.toUpperCase());
     }
 
     public NutritionInfo getNutrition() {
