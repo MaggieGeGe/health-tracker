@@ -3,12 +3,12 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/health-tracker-for-fridge?serverTimeZone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/health-tracker-for-fridge?serverTimeZone=GMT%2b9
     username: root
     password: "00000000"
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml #scan all mybatis .xml file
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

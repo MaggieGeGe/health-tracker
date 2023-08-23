@@ -13,7 +13,16 @@ import java.util.List;
 @Service
 public class UserService implements IUserService {
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
+
+    public int addUser(User user){
+        if(user.getId()==null){ //no id:add
+            return userMapper.insert(user);
+        }else {// yes :update
+            return userMapper.update(user);
+
+        }
+    }
 
     @Override
     public List<User> listUsers() {

@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -10,6 +11,8 @@ public class User {
     private Integer age;
     private String sex;
     private String phone;
+    @JsonIgnore
+    private String password;
 
 }
 
