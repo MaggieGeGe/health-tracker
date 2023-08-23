@@ -28,7 +28,7 @@
       <el-button type="primary" style="width: 100px;">Download <el-icon><Download /></el-icon></el-button>
     </div>
     <el-table :data="tableData" style="margin-top: 10px;margin-left: 0px" stripe header-cell-class-name="headerBg">
-      <el-table-column prop="name" label="Name" width="150px"></el-table-column>
+      <el-table-column prop="name" label="Name" width="150px" ></el-table-column>
       <el-table-column prop="type" label="Type" width="80px"></el-table-column>
       <el-table-column prop="productiondate" label="Production Date"  width="140px"></el-table-column>
       <el-table-column prop="expireddate" label="Expired Date"  width="120px"></el-table-column>
