@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.Service.IRequiredFoodService;
+import com.example.backend.Service.RequiredFoodService;
 import com.example.backend.entity.RequiredFood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +16,7 @@ import java.util.List;
 public class RequiredFoodController {
 
     @Autowired
-    IRequiredFoodService requiredFoodService;
+    RequiredFoodService requiredFoodService;
 
     @GetMapping("/list")
     public List<RequiredFood> listRequiredFood(){

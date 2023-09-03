@@ -1,18 +1,15 @@
-package com.example.backend.Mapper;
+package com.example.backend.mapper;
 
-import com.example.backend.controller.request.UserPageRequest;
 import com.example.backend.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 //数据库查询接口
-@Mapper
+//@Mapper
 public interface UserMapper {
     //@Select("select * from user")
     List<User> listUsers();
-
-    List<User> listByCondition(UserPageRequest userPageRequest);
 
     @Insert("INSERT INTO user(name,username,age,sex,phone,password) " +
             "VALUES(#{name},#{username},#{age},#{sex},#{phone},#{password})")

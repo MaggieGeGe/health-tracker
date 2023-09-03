@@ -1,10 +1,7 @@
 package com.example.backend.controller;
 
-import com.example.backend.Mapper.UserMapper;
-import com.example.backend.Service.IUserService;
-import com.example.backend.Service.impl.UserService;
-import com.example.backend.common.Result;
-import com.example.backend.controller.request.UserPageRequest;
+import com.example.backend.mapper.UserMapper;
+import com.example.backend.Service.UserService;
 import com.example.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,20 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
-
 @CrossOrigin
 @RestController //rest 封格的controller
 @RequestMapping("/user")
 public class UserController {
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
+
 
     @PostMapping
-    public Integer addUser(@RequestBody User user){//requestbody change the json to java object
+    public int addUser(@RequestBody User user){//requestbody change the json to java object
+
         return userService.addUser(user);
     }
     @GetMapping("/list")
@@ -57,10 +53,6 @@ public class UserController {
         return res;
     }
 
-//    public Result page(UserPageRequest userPageRequest){
-//        userService.page(userPageRequest);
-//        return Result.success(userService.page(userPageRequest));
-//
-//    }
+
 
 }

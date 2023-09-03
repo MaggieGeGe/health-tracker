@@ -1,11 +1,11 @@
-package com.example.backend.Mapper;
+package com.example.backend.mapper;
 
 import com.example.backend.entity.RequiredFood;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-@Mapper
+//@Mapper
 public interface RequiredFoodMapper {
     @Select("select * from requiredfood")
     List<RequiredFood> listRequiredFood() ;
