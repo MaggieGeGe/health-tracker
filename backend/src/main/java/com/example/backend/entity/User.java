@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-//@TableName("user")
+@TableName("user")
 public class User {
 
-    //@TableId(value = "id")
+    @TableId(value = "id")
     private Integer id;
     private String name;
     private String username;

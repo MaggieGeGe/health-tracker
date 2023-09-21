@@ -21,7 +21,7 @@ public class UserController {
 
 
     @PostMapping
-    public int addUser(@RequestBody User user){//requestbody change the json to java object
+    public boolean addUser(@RequestBody User user){//requestbody change the json to java object
 
         return userService.addUser(user);
     }
