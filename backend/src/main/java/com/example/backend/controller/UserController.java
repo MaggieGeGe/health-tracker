@@ -3,6 +3,8 @@ package com.example.backend.controller;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.Service.UserService;
 import com.example.backend.entity.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController //rest 封格的controller
 @RequestMapping("/user")
+@Tag(name = "user")//link：http://localhost:9090/swagger-ui/index.html
 public class UserController {
     @Autowired
     private UserMapper userMapper;
@@ -20,7 +23,9 @@ public class UserController {
     private UserService userService;
 
 
+
     @PostMapping
+    @Operation(summary = "Add new or update")
     public boolean addUser(@RequestBody User user){//requestbody change the json to java object
 
         return userService.addUser(user);
