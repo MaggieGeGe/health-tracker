@@ -22,8 +22,8 @@ public interface UserMapper extends BaseMapper<User> {
     @Delete("delete from user where id=#{id}")
     Integer deleteById(@Param("id") Integer id);
 
-    @Select("select * from user where username like #{username}  and phone like #{phone} limit #{pageNum}, #{pageSize}")
-    List<User> selectPage(Integer pageNum, Integer pageSize, String username, String phone);
+//    @Select("select * from user where username like #{username}  and phone like #{phone} limit #{pageNum}, #{pageSize}")
+//    List<User> selectPage(Integer pageNum, Integer pageSize, String username, String phone);
 
     @Select("select count(*) from user where username like #{username} and phone like #{phone}")
     Integer selectTotal(String username,String phone);
