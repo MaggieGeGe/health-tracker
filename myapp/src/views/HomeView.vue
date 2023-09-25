@@ -138,7 +138,7 @@ export default {
             if(res){
               this.$message.success("Save Succeed")
             } else {
-              this.$message.success("Save failed")
+              this.$message.error("Save failed")
             }
           }
       )
