@@ -26,7 +26,18 @@
     </div>
     <div style="padding: 10px 0">
       <el-button type="primary" style="width: 100px;" @click="handleAdd">Add <el-icon><CirclePlus /></el-icon></el-button>
-      <el-button type="danger" style="width: 100px;" @click="delBatch">Delete <el-icon><CircleClose /></el-icon></el-button>
+      <el-popconfirm
+          confirm-button-text="Yes"
+          cancel-button-text="No"
+          :icon="InfoFilled"
+          icon-color="#626AEF"
+          title="Are you sure to delete all?"
+          @confirm="delBatch"
+      >
+        <template #reference>
+          <el-button type="danger" style="width: 100px;">Delete <el-icon><CircleClose /></el-icon></el-button>
+        </template>
+      </el-popconfirm>
       <el-button type="primary" style="width: 100px;">Upload <el-icon><Upload /></el-icon></el-button>
       <el-button type="primary" style="width: 100px;">Download <el-icon><Download /></el-icon></el-button>
     </div>
@@ -164,6 +175,7 @@ export default {
             }
           }
       )
+      this.load()
 
     },
     reset(){
@@ -187,6 +199,7 @@ export default {
           this.$message.error("Delete failed")
         }
       })
+      this.load()
 
     },
     delBatch(){
@@ -198,6 +211,7 @@ export default {
           this.$message.error("Delete All Failed")
         }
       })
+      this.load()
     },
     handleSelectionChange(val){
       console.log(val)
