@@ -42,6 +42,11 @@ public class UserController {
         return userService.removeById(id);
     }
 
+    @PostMapping("/del/batch")
+    public boolean deleteBatch(@RequestBody List<Integer> ids){
+        return userService.removeBatchByIds(ids);
+    }
+
 //    @GetMapping("/page") //query by page
 //    public Map<String, Object> findPage(@RequestParam Integer pageNum,
 //                                        @RequestParam Integer pageSize,
@@ -74,6 +79,8 @@ public class UserController {
 
 
         IPage<User> userPage = userService.page(page,queryWrapper);
+        queryWrapper.orderByDesc("id");
+
         return userPage;
     }
 

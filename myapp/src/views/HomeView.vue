@@ -26,11 +26,12 @@
     </div>
     <div style="padding: 10px 0">
       <el-button type="primary" style="width: 100px;" @click="handleAdd">Add <el-icon><CirclePlus /></el-icon></el-button>
-      <el-button type="danger" style="width: 100px;">Delete <el-icon><CircleClose /></el-icon></el-button>
+      <el-button type="danger" style="width: 100px;" @click="delBatch">Delete <el-icon><CircleClose /></el-icon></el-button>
       <el-button type="primary" style="width: 100px;">Upload <el-icon><Upload /></el-icon></el-button>
       <el-button type="primary" style="width: 100px;">Download <el-icon><Download /></el-icon></el-button>
     </div>
-    <el-table :data="tableData" style="margin-top: 10px" stripe >
+    <el-table :data="tableData" style="margin-top: 10px" stripe @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" />
       <el-table-column prop="id" label="Id" width="60px"></el-table-column>
       <el-table-column prop="name" label="Name" ></el-table-column>
       <el-table-column prop="username" label="UserName"></el-table-column>
@@ -38,20 +39,31 @@
       <el-table-column prop="sex" label="Sex"  width="80px"></el-table-column>
       <el-table-column prop="phone" label="Phone"></el-table-column>
       <el-table-column label="Operation">
-        <el-button type="success" style="width: 70px;">Edit <el-icon><Edit /></el-icon></el-button>
-        <el-button type="danger" style="width: 70px;">Delete <el-icon><CircleClose /></el-icon></el-button>
+        <template #default="scope">
+          <el-button type="success" style="width: 70px;" @click="handleEdit(scope.row)">Edit <el-icon><Edit /></el-icon></el-button>
+          <el-popconfirm
+              confirm-button-text="Yes"
+              cancel-button-text="No"
+              :icon="InfoFilled"
+              icon-color="#626AEF"
+              title="Are you sure to delete this?"
+              @confirm="del(scope.row.id)"
+          >
+            <template #reference>
+              <el-button type="danger" style="width: 70px;">Delete <el-icon><CircleClose /></el-icon></el-button>
+            </template>
+          </el-popconfirm>
+        </template>
       </el-table-column>
     </el-table>
     <div style="margin-top: 30px">
       <el-pagination
-          v-model:current-page="currentPage3"
-          v-model:page-size="pageSize3"
+          v-model:page-size = "pageSize"
           :page-sizes="[5,10,20,50,100]"
           :current-page = "pageNum"
-          :page-size = "pageSize"
-          :small="small"
-          :disabled="disabled"
-          :background="background"
+          :small="false"
+          :disabled="false"
+          :background="false"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
           @size-change="handleSizeChange"
@@ -71,7 +83,7 @@
         <el-input v-model="form.age" autocomplete="off" />
       </el-form-item>
       <el-form-item label="Sex" :label-width="formLabelWidth">
-        <el-select v-model="form.sex" placeholder="Please select your sex">
+        <el-select :modelValue="form.sex" placeholder="Please select your sex" @update:modelValue="form.sex = $event">
           <el-option label="female" value="female" />
           <el-option label="male" value="male" />
         </el-select>
@@ -94,8 +106,16 @@
 </template>
 
 <script>
+import {request} from "axios";
+import { InfoFilled } from '@element-plus/icons-vue';
+
+
+
 export default {
   name: 'HomeView',
+  components:{
+    InfoFilled,
+  },
   data(){
     return {
       tableData:[],
@@ -106,7 +126,8 @@ export default {
       phoneNum:"",
       form:{},
       formLabelWidth: '100px',
-      dialogFormVisible :false
+      dialogFormVisible :false,
+      multipleSelection : []
     }
   },
   created(){
@@ -137,12 +158,13 @@ export default {
           res=>{
             if(res){
               this.$message.success("Save Succeed")
+              this.dialogFormVisible = false
             } else {
               this.$message.error("Save failed")
             }
           }
       )
-      this.dialogFormVisible = false
+
     },
     reset(){
       this.username = ""
@@ -151,6 +173,35 @@ export default {
     handleAdd(){
       this.dialogFormVisible = true
       this.form = {}
+    },
+    handleEdit(row){
+      this.form = row
+      this.dialogFormVisible = true
+    },
+    del(index){
+      this.$axios.delete("http://localhost:9090/user/"+index).then(res=>{
+        if(res){
+          this.$message.success("Delete Succeed")
+
+        } else {
+          this.$message.error("Delete failed")
+        }
+      })
+
+    },
+    delBatch(){
+      let ids = this.multipleSelection.map(v => v.id)
+      this.$axios.post("http://localhost:9090/user/del/batch",ids).then(res=>{
+        if(res){
+          this.$message.success("Delete All Succeed")
+        } else {
+          this.$message.error("Delete All Failed")
+        }
+      })
+    },
+    handleSelectionChange(val){
+      console.log(val)
+      this.multipleSelection =val
     },
     handleSizeChange(pageSize){
       console.log(pageSize)
